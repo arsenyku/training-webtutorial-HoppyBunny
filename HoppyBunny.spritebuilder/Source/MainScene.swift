@@ -11,6 +11,9 @@ class MainScene: CCNode {
     var grounds = [CCSprite]()  // initializes an empty array
     
     var obstacles : [CCNode] = []
+    
+    weak var obstaclesLayer: CCNode!
+
     let firstObstaclePosition : CGFloat = 280
     let distanceBetweenObstacles : CGFloat = 160
     
@@ -36,7 +39,6 @@ class MainScene: CCNode {
     
         sinceTouch += delta
         hero.rotation = clampf(hero.rotation, -30, 90)
-//        hero.rotation = clampf(hero.rotation, -30, 45)
         if (hero.physicsBody.allowsRotation) {
             let angularVelocity = clampf(Float(hero.physicsBody.angularVelocity), -2, 1)
             hero.physicsBody.angularVelocity = CGFloat(angularVelocity)
@@ -79,9 +81,10 @@ class MainScene: CCNode {
         }
         
         // create and add a new obstacle
-        let obstacle = CCBReader.load("Obstacle")
+        let obstacle = CCBReader.load("Obstacle") as! Obstacle
         obstacle.position = ccp(prevObstaclePos + distanceBetweenObstacles, 0)
-        gamePhysicsNode.addChild(obstacle)
+        obstacle.setupRandomPosition()
+		obstaclesLayer.addChild(obstacle)
         obstacles.append(obstacle)
     }
 }
