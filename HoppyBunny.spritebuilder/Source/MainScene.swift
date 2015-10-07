@@ -98,6 +98,15 @@ class MainScene: CCNode, CCPhysicsCollisionDelegate {
         }
         hero.position = ccp(hero.position.x + scrollSpeed * CGFloat(delta), hero.position.y)
         gamePhysicsNode.position = ccp(gamePhysicsNode.position.x - scrollSpeed * CGFloat(delta), gamePhysicsNode.position.y)
+
+        // Rounds the physics node's position to the nearest integer coordinates.
+        // This ensures the position is on pixel boundaries, preventing the subpixel 
+        // rendering artifacts above.  The scale factor adjusts the rounding process
+        // to support both retina and non-retina displays.
+        let scale = CCDirector.sharedDirector().contentScaleFactor
+        gamePhysicsNode.position = ccp(round(gamePhysicsNode.position.x * scale) / scale,
+            round(gamePhysicsNode.position.y * scale) / scale)
+        hero.position = ccp(round(hero.position.x * scale) / scale, round(hero.position.y * scale) / scale)
         
         // loop the ground whenever a ground image was moved entirely outside the screen
         for ground in grounds {
