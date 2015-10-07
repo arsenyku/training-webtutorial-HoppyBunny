@@ -1,10 +1,12 @@
 import Foundation
 
-class MainScene: CCNode {
+class MainScene: CCNode, CCPhysicsCollisionDelegate {
     weak var hero: CCSprite!
 	var sinceTouch : CCTime = 0
     var scrollSpeed : CGFloat = 80
     weak var gamePhysicsNode : CCPhysicsNode!
+
+    var gameOver = false
     
     weak var ground1 : CCSprite!
     weak var ground2 : CCSprite!
@@ -13,11 +15,15 @@ class MainScene: CCNode {
     var obstacles : [CCNode] = []
     
     weak var obstaclesLayer: CCNode!
+    
+    weak var restartButton : CCButton!
 
     let firstObstaclePosition : CGFloat = 280
     let distanceBetweenObstacles : CGFloat = 160
     
     func didLoadFromCCB() {
+        gamePhysicsNode.collisionDelegate = self
+        
         userInteractionEnabled = true
         grounds.append(ground1)
         grounds.append(ground2)
@@ -28,11 +34,44 @@ class MainScene: CCNode {
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
+        if (gameOver == true){
+            return
+        }
+        
+        
         hero.physicsBody.applyImpulse(ccp(0, 400))
         hero.physicsBody.applyAngularImpulse(10000)
         sinceTouch = 0
     }
+    
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, level: CCNode!) -> Bool {
+		triggerGameOver()
+        return true
+    }
  
+    func restart() {
+        let scene = CCBReader.loadAsScene("MainScene")
+        CCDirector.sharedDirector().replaceScene(scene)
+    }
+    
+    func triggerGameOver() {
+        if (gameOver == false) {
+            gameOver = true
+            restartButton.visible = true
+            scrollSpeed = 0
+            hero.rotation = 90
+            hero.physicsBody.allowsRotation = false
+            
+            // just in case
+            hero.stopAllActions()
+            
+            let move = CCActionEaseBounceOut(action: CCActionMoveBy(duration: 0.2, position: ccp(0, 4)))
+            let moveBack = CCActionEaseBounceOut(action: move.reverse())
+            let shakeSequence = CCActionSequence(array: [move, moveBack])
+            runAction(shakeSequence)
+        }
+    }
+    
     override func update(delta: CCTime) {
         let velocityY = clampf(Float(hero.physicsBody.velocity.y), -Float(CGFloat.max), 200)
         hero.physicsBody.velocity = ccp(0, CGFloat(velocityY))
