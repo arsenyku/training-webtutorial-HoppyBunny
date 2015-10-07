@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		12460BA41BC4921700C6BD30 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12460BA31BC4921700C6BD30 /* Obstacle.swift */; settings = {ASSET_TAGS = (); }; };
+		12460BB41BC49FB000C6BD30 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12460BB31BC49FB000C6BD30 /* Goal.swift */; settings = {ASSET_TAGS = (); }; };
 		5B121030197484FA004C1E1D /* HoppyBunnyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* HoppyBunnyActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
@@ -150,6 +151,7 @@
 
 /* Begin PBXFileReference section */
 		12460BA31BC4921700C6BD30 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		12460BB31BC49FB000C6BD30 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				12460BA31BC4921700C6BD30 /* Obstacle.swift */,
+				12460BB31BC49FB000C6BD30 /* Goal.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
 			name = Source;
@@ -820,6 +823,7 @@
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				12460BA41BC4921700C6BD30 /* Obstacle.swift in Sources */,
+				12460BB41BC49FB000C6BD30 /* Goal.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

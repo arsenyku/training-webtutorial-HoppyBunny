@@ -7,6 +7,9 @@ class MainScene: CCNode, CCPhysicsCollisionDelegate {
     weak var gamePhysicsNode : CCPhysicsNode!
 
     var gameOver = false
+    var points : NSInteger = 0
+    
+    weak var scoreLabel : CCLabelTTF!
     
     weak var ground1 : CCSprite!
     weak var ground2 : CCSprite!
@@ -46,6 +49,13 @@ class MainScene: CCNode, CCPhysicsCollisionDelegate {
     
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero: CCNode!, level: CCNode!) -> Bool {
 		triggerGameOver()
+        return true
+    }
+    
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, hero nodeA: CCNode!, goal: CCNode!) -> Bool {
+        goal.removeFromParent()
+        points++
+        
         return true
     }
  
@@ -111,6 +121,9 @@ class MainScene: CCNode, CCPhysicsCollisionDelegate {
                 spawnNewObstacle()
             }
         }
+        
+        scoreLabel.string = String(points)
+
     }
     
     func spawnNewObstacle() {
